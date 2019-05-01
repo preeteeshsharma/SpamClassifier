@@ -13,7 +13,7 @@ preprocess_messages=preprocessMessages(df)
 bag_of_words=createBag(preprocess_messages)
 
 #take the 500 most common words as feature words
-f=list(bag_of_words.most_common(500))
+f=list(bag_of_words.most_common(250))
 feature_words=[]
 for fw in f:
 	feature_words.append(fw[0])
