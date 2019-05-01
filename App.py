@@ -2,6 +2,7 @@
 from sklearn import model_selection
 from PreprocessText import *
 from FeatureExtract import *
+from Classifiers import *
 import nltk
 
 df=loadData('SMSSpamCollection')
@@ -28,5 +29,11 @@ for fw in f:
 zip_messages=zip(preprocess_messages, binary_labels)
 feature_sets=featureSetGenerator(feature_words, zip_messages)
 training, testing = model_selection.train_test_split(feature_sets, test_size = 0.25, random_state=1)
-print(len(training))
-print(len(testing))
+print("training dataset length: ",len(training))
+print("testing dataset length: ",len(testing))
+
+#train an ensemble model
+ensemble_model_nltk=ensembleClassification(training, testing)
+
+#print its accuracy metrics
+print_accuracy_metrics(ensemble_model_nltk, testing)
