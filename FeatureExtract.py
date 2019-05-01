@@ -1,6 +1,7 @@
 #generate features
 #the words in the sms will be our features.
 import nltk
+from nltk import FreqDist
 from nltk.tokenize import word_tokenize
 import numpy as np
 
@@ -11,7 +12,7 @@ def createBag(preprocess_messages):
 		words=word_tokenize(message)
 		for word in words:
 			bag_of_words.append(word)
-	bag_of_words=nltk.FreqDist(bag_of_words)
+	bag_of_words=FreqDist(bag_of_words)
 	return bag_of_words
 
 #finds feature word in each message of dataset
@@ -25,6 +26,6 @@ def featureFinder(message, feature_words):
 
 def featureSetGenerator(feature_words, zip_messages):
 	#np.random.seed = 1
-	#np.random.shuffle(zip_messages)
+	#np.random.shuffle(list(zip_messages))
 	feature_sets = [(featureFinder(text, feature_words), label) for (text, label) in zip_messages]
 	return feature_sets
